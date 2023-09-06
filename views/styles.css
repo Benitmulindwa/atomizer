@@ -1,3 +1,22 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 8%;
+    padding-right: 8%;
+    align-items: center;
+}
+
+.logo-div{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+}
+
+.logo-div img{
+    height: 3rem;
+}
+
 .sign{
     display: flex;
     height: 100vh;
