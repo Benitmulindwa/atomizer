@@ -2,26 +2,28 @@ import openai
 import flet as ft
 from flet import *
 import time
+from dotenv import load_dotenv
+import os
 
-key="API_KEY"
+load_dotenv()
+
+key = os.getenv("API_KEY")
 
 openai.api_key = key
+
 
 def main_style():
     return {
         "expand": True,
-        # "width": 420,
-        # "height": 500,
         "bgcolor": "#141518",
         "border_radius": 10,
-        "padding": 15,
+        "padding": 10,
     }
 
 
 def prompt_style():
     return {
         "height": 40,
-        "expand": True,
         "border_color": "white",
         "content_padding": 10,
         "cursor_color": "white",
@@ -32,9 +34,9 @@ class MainContentArea(ft.Container):
     def __init__(self):
         super().__init__(**main_style())
         self.chat = ft.ListView(
-            expand=True,
-            # height=200,
-            # spacing=15,
+            # expand=True,
+            height=200,
+            spacing=15,
             auto_scroll=True,
         )
         self.content = self.chat
@@ -78,9 +80,9 @@ class Prompt(ft.TextField):
     def run_prompt(self, event):
         text: any = event.control.value
         self.user_output(prompt=text)
-
-        self.gpt_output(prompt=text)
         self.value = ""
+        self.update()
+        self.gpt_output(prompt=text)
         self.update()
 
 
@@ -93,7 +95,17 @@ def main(page: ft.Page):
     prompt = Prompt(main.chat)
 
     page.add(
-        Text("Atomizer Chat", size=20, weight="white"),
+        Row(
+            controls=[
+                Container(
+                    expand=True,
+                    border_radius=5,
+                    content=Text("Atomizer Chat", size=20, weight="w600", left=50),
+                ),
+                Text("$1000", size=15),
+                IconButton(icon=icons.PAYMENT),
+            ]
+        ),
         main,
         Divider(height=6, color="transparent"),
         prompt,
