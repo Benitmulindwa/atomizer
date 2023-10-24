@@ -15,7 +15,7 @@ openai.api_key = key
 def main_style():
     return {
         "expand": True,
-        "bgcolor": "#141518",
+        "bgcolor": "#2b233c",
         "border_radius": 10,
         "padding": 10,
     }
@@ -34,7 +34,6 @@ class MainContentArea(ft.Container):
     def __init__(self):
         super().__init__(**main_style())
         self.chat = ft.ListView(
-            # expand=True,
             height=200,
             spacing=15,
             auto_scroll=True,
@@ -48,7 +47,12 @@ class CreateMessage(ft.Column):
         self.message: str = message
         self.text: str = ft.Text(self.message)
         super().__init__()
-        self.controls = [ft.Text(self.name, opacity=0.6), self.text]
+        self.controls = [
+            ft.Container(
+                content=ft.Text(self.name, opacity=0.6, size=20),
+            ),
+            self.text,
+        ]
 
 
 class Prompt(ft.TextField):
@@ -90,6 +94,7 @@ def main(page: ft.Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
     page.theme_mode = "dark"
+    page.bgcolor = "#2c1e4a"
 
     main = MainContentArea()
     prompt = Prompt(main.chat)
@@ -98,16 +103,18 @@ def main(page: ft.Page):
         Row(
             controls=[
                 Container(
-                    expand=True,
-                    border_radius=5,
-                    content=Text("Atomizer Chat", size=20, weight="w600", left=50),
+                    alignment=alignment.center_left,
+                    content=Text("$1,000", size=15),
                 ),
-                Text("$1000", size=15),
-                IconButton(icon=icons.PAYMENT),
-            ]
+                Container(
+                    alignment=alignment.top_left,
+                    content=IconButton(icon=icons.PAYMENT),
+                ),
+            ],
+            alignment=MainAxisAlignment.END,
         ),
         main,
-        Divider(height=6, color="transparent"),
+        Divider(height=8, color="transparent"),
         prompt,
     )
     page.update()
