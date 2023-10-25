@@ -15,15 +15,19 @@ openai.api_key = key
 def main_style():
     return {
         "expand": True,
+        "width": 420,
+        # "height": 500,
         "bgcolor": "#2b233c",
         "border_radius": 10,
-        "padding": 10,
+        "padding": 15,
     }
 
 
 def prompt_style():
     return {
+        # "expand": True,
         "height": 40,
+        "width": 420,
         "border_color": "white",
         "content_padding": 10,
         "cursor_color": "white",
@@ -48,8 +52,14 @@ class CreateMessage(ft.Column):
         self.text: str = ft.Text(self.message)
         super().__init__()
         self.controls = [
-            ft.Container(
-                content=ft.Text(self.name, opacity=0.6, size=20),
+            ft.Stack(
+                [
+                    Container(
+                        expand=True,
+                        bgcolor="red",
+                    ),
+                    ft.Text(self.name, opacity=0.6, size=20),
+                ]
             ),
             self.text,
         ]
@@ -94,21 +104,27 @@ def main(page: ft.Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
     page.theme_mode = "dark"
-    page.bgcolor = "#2c1e4a"
+    # page.bgcolor = "#2c1e4a"
 
     main = MainContentArea()
     prompt = Prompt(main.chat)
 
+    atomizer_text = Container(
+        expand=True,
+        content=Text("Atomizer", size=25),
+    )
+    atomizer_text.padding = padding.only(left=10, right=10)
+
     page.add(
         Row(
             controls=[
+                atomizer_text,
                 Container(
-                    alignment=alignment.center_left,
-                    content=Text("$1,000", size=15),
+                    content=Text("$1,000", size=15, color="#8919db"),
                 ),
                 Container(
                     alignment=alignment.top_left,
-                    content=IconButton(icon=icons.PAYMENT),
+                    content=IconButton(icon=icons.PAYMENT, icon_color="#8919db"),
                 ),
             ],
             alignment=MainAxisAlignment.END,
