@@ -25,7 +25,6 @@ def main_style():
 
 def prompt_style():
     return {
-        # "expand": True,
         "height": 40,
         "width": 420,
         "border_color": "white",
@@ -104,7 +103,6 @@ def main(page: ft.Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
     page.theme_mode = "dark"
-    # page.bgcolor = "#2c1e4a"
 
     main = MainContentArea()
     prompt = Prompt(main.chat)
