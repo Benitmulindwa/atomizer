@@ -25,8 +25,8 @@ def main_style():
 
 def prompt_style():
     return {
+        "expand": True,
         "height": 40,
-        "width": 420,
         "border_color": "white",
         "content_padding": 10,
         "cursor_color": "white",
@@ -67,6 +67,7 @@ class CreateMessage(ft.Column):
 class Prompt(ft.TextField):
     def __init__(self, chat: ft.ListView):
         super().__init__(**prompt_style(), on_submit=self.run_prompt)
+        self.hint_text = "Ask me anything..."
         self.chat: ListView = chat
 
     def animate_text(self, name: str, prompt: str):
@@ -99,6 +100,21 @@ class Prompt(ft.TextField):
         self.update()
 
 
+def cont_pad(cont: Container, left=10, top=10, right=10, bottom=10):
+    cont.padding = padding.only(left, top, right, bottom)
+    return cont
+
+
+def column_align(col: Column, align: str):
+    if align == "start":
+        col.alignment = CrossAxisAlignment.START
+    elif align == "end":
+        col.alignment = CrossAxisAlignment.END
+    else:
+        col.alignment = CrossAxisAlignment.CENTER
+    return col
+
+
 def main(page: ft.Page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
@@ -111,25 +127,51 @@ def main(page: ft.Page):
         expand=True,
         content=Text("Atomizer", size=25),
     )
-    atomizer_text.padding = padding.only(left=10, right=10)
 
     page.add(
         Row(
             controls=[
-                atomizer_text,
-                Container(
-                    content=Text("$1,000", size=15, color="#8919db"),
+                cont_pad(atomizer_text, top=25),
+                cont_pad(
+                    Container(
+                        content=Text("$1,000", size=15, color="#8919db"),
+                    ),
+                    top=25,
                 ),
-                Container(
-                    alignment=alignment.top_left,
-                    content=IconButton(icon=icons.PAYMENT, icon_color="#8919db"),
+                cont_pad(
+                    Container(
+                        alignment=alignment.top_left,
+                        content=IconButton(icon=icons.PAYMENT, icon_color="#8919db"),
+                    ),
+                    top=25,
+                    right=5,
                 ),
             ],
             alignment=MainAxisAlignment.END,
         ),
         main,
         Divider(height=8, color="transparent"),
-        prompt,
+        column_align(
+            Column(
+                [
+                    Row(
+                        controls=[
+                            prompt,
+                            Container(
+                                content=IconButton(
+                                    icons.ARROW_CIRCLE_UP,
+                                    icon_size=40,
+                                    selected_icon_color="#2b233c",
+                                )
+                            ),
+                        ],
+                        alignment=MainAxisAlignment.CENTER,
+                        spacing=5,
+                    ),
+                ]
+            ),
+            align="start",
+        ),
     )
     page.update()
 
