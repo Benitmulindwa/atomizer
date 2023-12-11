@@ -4,6 +4,7 @@ from flet import *
 
 
 def Login(page):
+    # page.bgcolor = "red"
     content = Column(
         controls=[
             Container(

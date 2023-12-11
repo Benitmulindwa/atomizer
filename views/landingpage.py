@@ -1,39 +1,62 @@
 from flet import *
 
+# ---------------------------------------------------------------------------------------------------------------#
+## gradient Background ##
+# ---------------------------------------------------------------------------------------------------------------#
+
+# Container(
+#     # expand=True,
+#     height=800,
+#     gradient=LinearGradient(
+#         begin=alignment.center_left,
+#         end=alignment.center_right,
+#         colors=["#442063", "#1d3263"],
+#     ),
+#     alignment=alignment.center,
+# ),
+
+# ---------------------------------------------------------------------------------------------------------------#
+##LOGO##
+# ---------------------------------------------------------------------------------------------------------------#
+
+# Row(
+#                 controls=[
+#                     Container(height=20, width=20, bgcolor="blue"),
+#                     Text("ATOMIZER"),
+#                 ],
+#                 left=10,
+#                 top=5,
+#             ),
+
+# ---------------------------------------------------------------------------------------------------------------#
+landing_text = Container(
+    expand=True,
+    width=500,
+    content=Text("Your AI-Powered Science Problem - Solving Companion", size=60),
+)
+
+landing_text.padding = padding.only(left=20)
+
 
 def LandingPage(page):
-    content = Stack(
-        # expand=True,
+    page.bgcolor = "#1d3263"
+    return Column(
+        horizontal_alignment=CrossAxisAlignment.CENTER,
         controls=[
-            Container(
-                # expand=True,
-                height=800,
-                gradient=LinearGradient(
-                    begin=alignment.center_left,
-                    end=alignment.center_right,
-                    colors=["#442063", "#1d3263"],
-                ),
-                # padding=padding.all(0),
-                alignment=alignment.center,
+            Divider(height=3, color="transparent"),
+            Row(
+                controls=[
+                    Container(height=20, width=20, bgcolor="blue"),
+                    Text("ATOMIZER"),
+                ],
             ),
-            Text("ATOMIZER", left=10, top=5),
-            Column(
+            Row(
                 # expand=True,
                 controls=[
-                    Container(
-                        expand=True,
-                        width=500,
-                        # height=300,
-                        bgcolor="red",
-                        content=Text(
-                            "Your AI-Powered Science Problem- Solving Companion",
-                            size=50,
-                        ),
-                    ),
+                    landing_text,
+                    Container(width=200, height=200, bgcolor="red"),
                 ],
-                left=20,
-                top=50,
             ),
+            Container(width=200, expand=True, bgcolor="red"),
         ],
     )
-    return content
