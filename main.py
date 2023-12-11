@@ -7,7 +7,7 @@ def main(page: Page):
     page.theme_mode = "dark"
     page.vertical_alignment = "center"
     page.horizontal_alignment = "center"
-    page.padding = 0
+    page.padding = 10
 
     myroute = Route(page)
     page.on_route_change = myroute.change_route

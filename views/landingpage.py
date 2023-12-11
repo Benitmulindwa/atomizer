@@ -32,10 +32,28 @@ from flet import *
 landing_text = Container(
     expand=True,
     width=500,
-    content=Text("Your AI-Powered Science Problem - Solving Companion", size=60),
+    content=Text(
+        "Your AI-Powered Science Problem - Solving Companion", expand=True, size=60
+    ),
+    alignment=alignment.center,
 )
 
-landing_text.padding = padding.only(left=20)
+landing_text.padding = padding.only(left=20, top=30)
+# ---------------------------------------------------------------------------------------------------------------#
+################### GET STARTED BUTTOM #####################################
+# ---------------------------------------------------------------------------------------------------------------#
+getstarted = Container(
+    width=600,
+    height=35,
+    bgcolor="#8919db",
+    content=Text("GET STARTED", expand=True),
+    alignment=alignment.center,
+    border_radius=5,
+)
+getstarted.padding = padding.only(left=50)
+# ---------------------------------------------------------------------------------------------------------------#
+
+# ---------------------------------------------------------------------------------------------------------------#
 
 
 def LandingPage(page):
@@ -43,20 +61,33 @@ def LandingPage(page):
     return Column(
         horizontal_alignment=CrossAxisAlignment.CENTER,
         controls=[
-            Divider(height=3, color="transparent"),
             Row(
                 controls=[
                     Container(height=20, width=20, bgcolor="blue"),
                     Text("ATOMIZER"),
+                    Row(expand=True),
+                    Container(
+                        # expand=True,
+                        content=Text("LOGIN", expand=True),
+                        bgcolor="#8919db",
+                        alignment=alignment.center,
+                        border_radius=50,
+                    ),
                 ],
             ),
-            Row(
-                # expand=True,
+            Column(
+                auto_scroll=True,
+                expand=True,
                 controls=[
-                    landing_text,
-                    Container(width=200, height=200, bgcolor="red"),
+                    Row(
+                        # expand=True,
+                        controls=[
+                            landing_text,
+                            Container(height=500, expand=True, bgcolor="red"),
+                        ],
+                    ),
+                    getstarted,
                 ],
             ),
-            Container(width=200, expand=True, bgcolor="red"),
         ],
     )
