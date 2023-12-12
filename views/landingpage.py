@@ -42,7 +42,7 @@ getstarted = Container(
     alignment=alignment.center,
     border_radius=5,
 )
-getstarted.margin = margin.only(left=20)
+getstarted.margin = margin.only(left=20, right=20)
 
 # ---------------------------------------------------------------------------------------------------------------#
 #################### LOGIN BUTTON #########################
@@ -110,29 +110,19 @@ def LandingPage(page):
                     Column(
                         controls=[
                             Row(
+                                vertical_alignment=CrossAxisAlignment.CENTER,
                                 controls=[
                                     Row(
+                                        expand=True,
                                         controls=[
-                                            # Container(
-                                            #     expand=True,
-                                            #     width=500,
-                                            #     content=Text(
-                                            #         "Your AI-Powered Science Problem - Solving Companion",
-                                            #         # expand=True,
-                                            #         size=60,
-                                            #     ),
-                                            #     alignment=alignment.center,
-                                            # )
-                                            # landing_text,
+                                            landing_text,
                                             Container(
-                                                expand=True, height=500, bgcolor="blue"
+                                                height=300, expand=True, bgcolor="red"
                                             ),
-                                            Text("gfgfgfgfytrytrhhgjhjuyuy"),
                                         ],
                                     ),
                                     # landing_text,
-                                    Container(height=300, expand=True, bgcolor="red"),
-                                ]
+                                ],
                             ),
                             getstarted,
                         ],
