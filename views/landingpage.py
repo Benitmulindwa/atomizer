@@ -6,13 +6,30 @@ class Mylandingpage(UserControl):
     def __init__(self, page):
         super().__init__()
         self.page = page
-        # ---------------------------------------------------------------------------------------------------------------#
-        ################## Responsivity ###############
-        # ---------------------------------------------------------------------------------------------------------------#
-        # def resize(page,control):
-        #     if page.width>
+        # self.text_size = 0
+        self.text_size = int((self.page.width / 21))
+        # self.page.width.update()
+        # # print(self.text_size)
 
     def build(self):
+        # self.page.update()
+
+        self.logo = Container(height=30, width=30, bgcolor="blue")
+        self.logo.margin = margin.only(left=10, top=20)
+
+        self._atomizer = Container(
+            content=Text(
+                "ATOMIZER",
+            ),
+        )
+        self._atomizer.margin = margin.only(top=20)
+
+        self.landing_anim = Container(
+            col={"sm": 4, "md": 6, "xl": 6},
+            height=300,
+            bgcolor="red",
+        )
+        self.landing_anim.margin = margin.only(right=20)
         # ---------------------------------------------------------------------------------------------------------------#
         ################### GET STARTED BUTTOM #####################################
         # ---------------------------------------------------------------------------------------------------------------#
@@ -30,7 +47,6 @@ class Mylandingpage(UserControl):
         #################### LOGIN BUTTON #########################
         # ---------------------------------------------------------------------------------------------------------------#
         self.login_bt = Container(
-            # expand=True,
             width=100,
             height=20,
             content=Text("LOGIN"),
@@ -38,19 +54,20 @@ class Mylandingpage(UserControl):
             alignment=alignment.center,
             border_radius=50,
         )
+        self.login_bt.margin = margin.only(right=20, top=20)
 
         # ---------------------------------------------------------------------------------------------------------------#
         #################### Landing Text #########################
         # ---------------------------------------------------------------------------------------------------------------#
 
         self.landing_text = Container(
-            col={"sm": 4, "md": 4, "xl": 6},
+            col={"sm": 4, "md": 6, "xl": 6},
             height=550,
             expand=True,
             content=Text(
                 "Your AI-Powered Science Problem - Solving Companion",
                 expand=True,
-                size=60,
+                size=self.text_size,
             ),
             alignment=alignment.center,
         )
@@ -75,12 +92,12 @@ class Mylandingpage(UserControl):
                         ),
                         Row(
                             controls=[
-                                Container(height=30, width=30, bgcolor="blue"),
-                                Text("ATOMIZER"),
+                                self.logo,
+                                self._atomizer,
                                 Row(expand=True),
                                 self.login_bt,
                             ],
-                            # top=10,
+                            # top=20,
                         ),
                         Column(
                             controls=[
@@ -89,11 +106,7 @@ class Mylandingpage(UserControl):
                                     alignment=MainAxisAlignment.CENTER,
                                     controls=[
                                         self.landing_text,
-                                        Container(
-                                            col={"sm": 2, "md": 4, "xl": 6},
-                                            height=300,
-                                            bgcolor="red",
-                                        ),
+                                        self.landing_anim
                                         # landing_text,
                                     ],
                                 ),
@@ -111,8 +124,5 @@ class Mylandingpage(UserControl):
 
 def LandingPage(page):
     content = Mylandingpage(page)
-    # if 565 < page.width < 1190:
-    #     self.landing_text.content.size = 30
-    #     content.update()
 
     return content

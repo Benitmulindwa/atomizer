@@ -9,7 +9,6 @@ def main(page: Page):
     page.horizontal_alignment = "center"
     page.padding = 0
     page.auto_scroll = True
-
     myroute = Route(page)
     page.on_route_change = myroute.change_route
     page.add(myroute.body)
