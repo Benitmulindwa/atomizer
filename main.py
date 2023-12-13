@@ -8,6 +8,7 @@ def main(page: Page):
     page.vertical_alignment = "center"
     page.horizontal_alignment = "center"
     page.padding = 0
+    page.fonts = {"lastica": "fonts/FontsFree-Net-Lastica.ttf"}
     page.auto_scroll = True
     myroute = Route(page)
     page.on_route_change = myroute.change_route

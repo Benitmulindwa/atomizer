@@ -6,21 +6,14 @@ class Mylandingpage(UserControl):
     def __init__(self, page):
         super().__init__()
         self.page = page
-        # self.text_size = 0
         self.text_size = int((self.page.width / 21))
-        # self.page.width.update()
-        # # print(self.text_size)
 
     def build(self):
-        # self.page.update()
-
         self.logo = Container(height=30, width=30, bgcolor="blue")
         self.logo.margin = margin.only(left=10, top=20)
 
         self._atomizer = Container(
-            content=Text(
-                "ATOMIZER",
-            ),
+            content=Text("ATOMIZER", font_family="lastica"),
         )
         self._atomizer.margin = margin.only(top=20)
 
@@ -37,9 +30,10 @@ class Mylandingpage(UserControl):
             width=600,
             height=35,
             bgcolor="#8919db",
-            content=Text("GET STARTED", expand=True),
+            content=Text("GET STARTED", expand=True, font_family="lastica"),
             alignment=alignment.center,
             border_radius=5,
+            on_click=self._go_to_login,
         )
         self.getstarted.margin = margin.only(left=20, right=20)
 
@@ -48,11 +42,12 @@ class Mylandingpage(UserControl):
         # ---------------------------------------------------------------------------------------------------------------#
         self.login_bt = Container(
             width=100,
-            height=20,
-            content=Text("LOGIN"),
+            height=25,
+            content=Text("LOGIN", font_family="lastica"),
             bgcolor="#8919db",
             alignment=alignment.center,
             border_radius=50,
+            on_click=self._go_to_login,
         )
         self.login_bt.margin = margin.only(right=20, top=20)
 
@@ -65,11 +60,13 @@ class Mylandingpage(UserControl):
             height=550,
             expand=True,
             content=Text(
-                "Your AI-Powered Science Problem - Solving Companion",
+                "Your   AI-Powered   Science Problem - Solving Companion",
                 expand=True,
-                size=self.text_size,
+                size=45,
+                font_family="lastica",
             ),
             alignment=alignment.center,
+            on_hover=self.animate_text,
         )
 
         self.landing_text.margin = margin.only(left=20, top=30)
@@ -104,11 +101,7 @@ class Mylandingpage(UserControl):
                                 ResponsiveRow(
                                     vertical_alignment=CrossAxisAlignment.CENTER,
                                     alignment=MainAxisAlignment.CENTER,
-                                    controls=[
-                                        self.landing_text,
-                                        self.landing_anim
-                                        # landing_text,
-                                    ],
+                                    controls=[self.landing_text, self.landing_anim],
                                 ),
                                 self.getstarted,
                             ],
@@ -117,6 +110,18 @@ class Mylandingpage(UserControl):
                 )
             ],
         )
+
+    def animate_text(self, e):
+        word_list = []
+        for word in self.landing_text.content.value:
+            word_list.append(word)
+            self.landing_text.content.value = "".join(word_list)
+            self.landing_text.content.update()
+            sleep(0.08)
+
+    ## GO TO LOGIN ##
+    def _go_to_login(self, e):
+        return self.page.go("/login")
 
 
 # ---------------------------------------------------------------------------------------------------------------#
