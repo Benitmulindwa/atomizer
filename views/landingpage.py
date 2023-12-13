@@ -2,35 +2,10 @@ from flet import *
 from time import sleep
 
 # ---------------------------------------------------------------------------------------------------------------#
-## gradient Background ##
+################## Responsivity ###############
 # ---------------------------------------------------------------------------------------------------------------#
-
-# Container(
-#     # expand=True,
-#     height=800,
-#     gradient=LinearGradient(
-#         begin=alignment.center_left,
-#         end=alignment.center_right,
-#         colors=["#442063", "#1d3263"],
-#     ),
-#     alignment=alignment.center,
-# ),
-
-# ---------------------------------------------------------------------------------------------------------------#
-##LOGO##
-# ---------------------------------------------------------------------------------------------------------------#
-
-# Row(
-#                 controls=[
-#                     Container(height=20, width=20, bgcolor="blue"),
-#                     Text("ATOMIZER"),
-#                 ],
-#                 left=10,
-#                 top=5,
-#             ),
-
-# ---------------------------------------------------------------------------------------------------------------#
-
+# def resize(page,control):
+#     if page.width>
 # ---------------------------------------------------------------------------------------------------------------#
 ################### GET STARTED BUTTOM #####################################
 # ---------------------------------------------------------------------------------------------------------------#
@@ -62,27 +37,22 @@ login_bt = Container(
 # ---------------------------------------------------------------------------------------------------------------#
 
 landing_text = Container(
+    col={"sm": 4, "md": 4, "xl": 6},
+    height=550,
     expand=True,
-    height=500,
     content=Text(
         "Your AI-Powered Science Problem - Solving Companion", expand=True, size=60
     ),
     alignment=alignment.center,
 )
 
-# landing_text.content.value = ""
-# for word in landing_text.content.value.split(" "):
-#     landing_text.content.value = "".join(word)
-#     landing_text.content.update()
-#     sleep(0.008)
-
-landing_text.padding = padding.only(left=20, top=30)
+landing_text.margin = margin.only(left=20, top=30)
 
 # ---------------------------------------------------------------------------------------------------------------#
 
 
 def LandingPage(page):
-    return Column(
+    content = Column(
         horizontal_alignment=CrossAxisAlignment.CENTER,
         auto_scroll=True,
         controls=[
@@ -109,17 +79,15 @@ def LandingPage(page):
                     ),
                     Column(
                         controls=[
-                            Row(
+                            ResponsiveRow(
                                 vertical_alignment=CrossAxisAlignment.CENTER,
+                                alignment=MainAxisAlignment.CENTER,
                                 controls=[
-                                    Row(
-                                        expand=True,
-                                        controls=[
-                                            landing_text,
-                                            Container(
-                                                height=300, expand=True, bgcolor="red"
-                                            ),
-                                        ],
+                                    landing_text,
+                                    Container(
+                                        col={"sm": 2, "md": 4, "xl": 6},
+                                        height=300,
+                                        bgcolor="red",
                                     ),
                                     # landing_text,
                                 ],
@@ -131,3 +99,8 @@ def LandingPage(page):
             )
         ],
     )
+    if 565 < page.width < 1190:
+        landing_text.content.size = 30
+        content.update()
+
+    return content
