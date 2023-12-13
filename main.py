@@ -13,7 +13,7 @@ def main(page: Page):
     myroute = Route(page)
     page.on_route_change = myroute.change_route
     page.add(myroute.body)
-    page.go("/")
+    page.go("/login")
     page.update()
 
 

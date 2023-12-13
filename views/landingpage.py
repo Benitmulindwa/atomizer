@@ -18,11 +18,11 @@ class Mylandingpage(UserControl):
         self._atomizer.margin = margin.only(top=20)
 
         self.landing_anim = Container(
-            col={"sm": 4, "md": 6, "xl": 6},
-            height=300,
+            col={"md": 6, "xl": 6},
+            height=200,
             bgcolor="red",
         )
-        self.landing_anim.margin = margin.only(right=20)
+        self.landing_anim.margin = margin.only(left=20, right=20)
         # ---------------------------------------------------------------------------------------------------------------#
         ################### GET STARTED BUTTOM #####################################
         # ---------------------------------------------------------------------------------------------------------------#
@@ -35,7 +35,7 @@ class Mylandingpage(UserControl):
             border_radius=5,
             on_click=self._go_to_login,
         )
-        self.getstarted.margin = margin.only(left=20, right=20)
+        self.getstarted.margin = margin.only(left=20, right=20, top=0)
 
         # ---------------------------------------------------------------------------------------------------------------#
         #################### LOGIN BUTTON #########################
@@ -50,26 +50,28 @@ class Mylandingpage(UserControl):
             on_click=self._go_to_login,
         )
         self.login_bt.margin = margin.only(right=20, top=20)
+        self.login_bt.padding = padding.only(top=4)
 
         # ---------------------------------------------------------------------------------------------------------------#
         #################### Landing Text #########################
         # ---------------------------------------------------------------------------------------------------------------#
 
         self.landing_text = Container(
-            col={"sm": 4, "md": 6, "xl": 6},
+            col={"md": 6, "xl": 6},
             height=550,
             expand=True,
             content=Text(
-                "Your   AI-Powered   Science Problem - Solving Companion",
+                "Your  AI-Powered  Science  Problem - Solving Companion",
                 expand=True,
                 size=45,
                 font_family="lastica",
+                weight=FontWeight.BOLD,
             ),
             alignment=alignment.center,
-            on_hover=self.animate_text,
+            # on_hover=self.animate_text,
         )
 
-        self.landing_text.margin = margin.only(left=20, top=30)
+        self.landing_text.margin = margin.only(left=20, top=50)
 
         return Column(
             horizontal_alignment=CrossAxisAlignment.CENTER,
