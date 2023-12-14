@@ -96,7 +96,6 @@ class MyLoginpage(UserControl):
                 end=alignment.center_right,
                 colors=["#1d3263", "#442063"],
             ),
-            on_click=self.animate_cont,
         )
 
     def custom_textfield(self, name, password_state: bool = False):
@@ -127,10 +126,6 @@ class MyLoginpage(UserControl):
 
     def _go_to_login(self, e):
         return self.page.go("/login")
-
-    def animate_cont(self, e):
-        self._container.offset = transform.Offset(0, 0)
-        self._container.update()
 
 
 def Login(page):
