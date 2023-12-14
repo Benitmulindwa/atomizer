@@ -72,8 +72,9 @@ class MyLoginpage(UserControl):
                 color="#d73cbe",
                 offset=Offset(0, 0),
                 blur_style=ShadowBlurStyle.OUTER,
-            )
-            # opacity=0.3,
+            ),
+            offset=transform.Offset(-2, 0),
+            animate_offset=animation.Animation(1000),
         )
         self._container.margin = margin.only(top=100)
 
@@ -86,11 +87,6 @@ class MyLoginpage(UserControl):
                         ],
                         horizontal_alignment=CrossAxisAlignment.CENTER,
                     ),
-                    Column(
-                        [],
-                        alignment=MainAxisAlignment.CENTER,
-                        # horizontal_alignment=CrossAxisAlignment.CENTER,
-                    ),
                 ],
             ),
             alignment=alignment.center,
@@ -100,6 +96,7 @@ class MyLoginpage(UserControl):
                 end=alignment.center_right,
                 colors=["#1d3263", "#442063"],
             ),
+            on_click=self.animate_cont,
         )
 
     def custom_textfield(self, name, password_state: bool = False):
@@ -130,6 +127,10 @@ class MyLoginpage(UserControl):
 
     def _go_to_login(self, e):
         return self.page.go("/login")
+
+    def animate_cont(self, e):
+        self._container.offset = transform.Offset(0, 0)
+        self._container.update()
 
 
 def Login(page):
