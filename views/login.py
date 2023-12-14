@@ -9,24 +9,35 @@ class MyLoginpage(UserControl):
         self.page = page
 
     def build(self):
-        self._login_text = Container(
+        self.login_text = Container(
             content=Text(
-                "LOGIN",
-                bgcolor="blue",
+                "CREATE  AN  ACCOUNT",
                 font_family="lastica",
                 weight=FontWeight.BOLD,
-            )
+                text_align="center",
+                size=15,
+            ),
         )
-        # self._login_text.alignment = alignment.center
+        self.login_text.margin = margin.only(top=20, bottom=20)
+
         self._container = Container(
+            Column(
+                [
+                    self.login_text,
+                    self.custom_textfield("Username:"),
+                    self.custom_textfield("Email:"),
+                    self.custom_textfield("Password:"),
+                ],
+                horizontal_alignment=CrossAxisAlignment.CENTER,
+            ),
             width=420,
             height=500,
-            # bgcolor="transparent",
+            bgcolor="transparent",
             border=border.all(2, "white"),
-            opacity=0.3,
-            alignment=alignment.center,
+            # opacity=0.3,
         )
         self._container.margin = margin.only(top=100)
+        # self._container.padding = padding.only(top=10)
         return Container(
             content=Stack(
                 [
@@ -37,9 +48,7 @@ class MyLoginpage(UserControl):
                         horizontal_alignment=CrossAxisAlignment.CENTER,
                     ),
                     Column(
-                        [
-                            self._login_text,
-                        ],
+                        [],
                         alignment=MainAxisAlignment.CENTER,
                         # horizontal_alignment=CrossAxisAlignment.CENTER,
                     ),
@@ -50,8 +59,31 @@ class MyLoginpage(UserControl):
             gradient=LinearGradient(
                 begin=alignment.center_left,
                 end=alignment.center_right,
-                colors=["#442063", "#1d3263"],
+                colors=["#1d3263", "#d73cb"],
             ),
+        )
+
+    def custom_textfield(self, name):
+        return Column(
+            [
+                Container(
+                    Text(name, font_family="lastica"),
+                    padding=padding.only(left=10, right=10, top=15),
+                ),
+                Container(
+                    TextField(
+                        bgcolor="white",
+                        height=25,
+                        text_style=TextStyle(color="black"),
+                        border_radius=5,
+                        border_color="white",
+                        border=border.all(0.5, "white"),
+                        cursor_color="#1d3263",
+                        cursor_height=15,
+                    ),
+                    padding=padding.only(left=10, right=10, top=5),
+                ),
+            ]
         )
 
 
