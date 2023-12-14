@@ -19,7 +19,7 @@ class MyLoginpage(UserControl):
                 size=15,
             ),
         )
-        self.login_text.margin = margin.only(top=20, bottom=20)
+        self.login_text.margin = margin.only(top=40, bottom=20)
 
         self._container = Container(
             Column(
@@ -56,7 +56,7 @@ class MyLoginpage(UserControl):
                         bgcolor="#8919db",
                         border_radius=5,
                         width=150,
-                        margin=margin.only(top=20),
+                        margin=margin.only(top=25),
                         padding=padding.only(bottom=4),
                     ),
                 ],
@@ -113,12 +113,13 @@ class MyLoginpage(UserControl):
                     TextField(
                         bgcolor="white",
                         height=25,
-                        text_style=TextStyle(color="black"),
+                        text_style=TextStyle(color="#8919db", weight=FontWeight.W_500),
+                        content_padding=padding.only(top=4, left=5),
                         border_radius=5,
                         border_color="white",
                         border=border.all(0.5, "white"),
                         cursor_color="#1d3263",
-                        cursor_height=15,
+                        cursor_height=22,
                         password=password_state,
                         can_reveal_password=password_state,
                     ),
