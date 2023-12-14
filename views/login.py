@@ -26,7 +26,7 @@ class MyLoginpage(UserControl):
                     self.login_text,
                     self.custom_textfield("Username:"),
                     self.custom_textfield("Email:"),
-                    self.custom_textfield("Password:"),
+                    self.custom_textfield("Password:", True),
                 ],
                 horizontal_alignment=CrossAxisAlignment.CENTER,
             ),
@@ -63,7 +63,7 @@ class MyLoginpage(UserControl):
             ),
         )
 
-    def custom_textfield(self, name):
+    def custom_textfield(self, name, password_state: bool = False):
         return Column(
             [
                 Container(
@@ -80,6 +80,8 @@ class MyLoginpage(UserControl):
                         border=border.all(0.5, "white"),
                         cursor_color="#1d3263",
                         cursor_height=15,
+                        password=password_state,
+                        can_reveal_password=password_state,
                     ),
                     padding=padding.only(left=10, right=10, top=5),
                 ),
