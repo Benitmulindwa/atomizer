@@ -63,7 +63,7 @@ class MyLoginpage(UserControl):
                         ),
                         bgcolor="#8919db",
                         border_radius=5,
-                        width=150,
+                        width=150 if self.up_txt == "CREATE  AN  ACCOUNT" else 100,
                         margin=margin.only(top=25, bottom=25),
                         padding=padding.only(bottom=4),
                     ),
