@@ -16,7 +16,7 @@ class Route:
             "/register": Register(page),
             # "/chat": Chat(page),
         }
-        self.body = Container(content=self.routes["/"])
+        self.body = Container(content=self.routes["/"], expand=True)
 
     def change_route(self, route):
         self.body.content = self.routes[route.route]

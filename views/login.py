@@ -63,7 +63,7 @@ class MyLoginpage(UserControl):
                 horizontal_alignment=CrossAxisAlignment.CENTER,
             ),
             width=420,
-            height=500,
+            expand=True,
             bgcolor="transparent",
             border=border.all(2, "white"),
             shadow=BoxShadow(
@@ -73,24 +73,20 @@ class MyLoginpage(UserControl):
                 offset=Offset(0, 0),
                 blur_style=ShadowBlurStyle.OUTER,
             ),
-            offset=transform.Offset(-2, 0),
-            animate_offset=animation.Animation(1000),
+            # offset=transform.Offset(-2, 0),
+            # animate_offset=animation.Animation(1000),
         )
-        self._container.margin = margin.only(top=100)
+        self._container.margin = margin.only(top=90, bottom=100)
 
         return Container(
             content=Stack(
                 [
-                    Column(
-                        controls=[
-                            self._container,
-                        ],
-                        horizontal_alignment=CrossAxisAlignment.CENTER,
-                    ),
+                    self._container,
                 ],
             ),
             alignment=alignment.center,
             height=800,
+            expand=True,
             gradient=LinearGradient(
                 begin=alignment.center_left,
                 end=alignment.center_right,
@@ -108,6 +104,7 @@ class MyLoginpage(UserControl):
                 Container(
                     TextField(
                         bgcolor="white",
+                        expand=True,
                         height=25,
                         text_style=TextStyle(color="#8919db", weight=FontWeight.W_500),
                         content_padding=padding.only(top=4, left=5),
@@ -121,7 +118,7 @@ class MyLoginpage(UserControl):
                     ),
                     padding=padding.only(left=10, right=10, top=0, bottom=15),
                 ),
-            ]
+            ],
         )
 
     def _go_to_login(self, e):
