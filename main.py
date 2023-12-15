@@ -1,7 +1,6 @@
 from views.Routing import Route
 from flet import *
 from time import sleep
-from custom_animations import *
 
 
 def main(page: Page):
@@ -14,7 +13,7 @@ def main(page: Page):
     myroute = Route(page)
     page.on_route_change = myroute.change_route
     page.add(myroute.body)
-    page.go("/login")
+    page.go("/")
     page.update()
     # page.controls[0].content.controls[0].content.controls[0].controls[
     #     0

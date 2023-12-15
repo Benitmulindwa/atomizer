@@ -2,16 +2,17 @@ from flet import *
 
 
 class MyLoginpage(UserControl):
-    def __init__(self, page, name_list: list):
+    def __init__(self, page, fields_list: list, up_txt: str):
         super().__init__()
         self.page = page
-        self.name_list = name_list
+        self.fields_list = fields_list
+        self.up_txt = up_txt
 
     def build(self):
         # print(self.custom_textfield("vagaga").controls[1].content)
         self.login_text = Container(
             content=Text(
-                "CREATE  AN  ACCOUNT",
+                self.up_txt,
                 font_family="lastica",
                 weight=FontWeight.BOLD,
                 text_align="center",
@@ -25,25 +26,28 @@ class MyLoginpage(UserControl):
             Column(
                 [
                     self.login_text,
-                    self.custom_textfield("Username:"),
-                    self.custom_textfield("Email:"),
-                    self.custom_textfield("Password:", True),
+                    *[self.custom_textfield(i) for i in self.fields_list],
                     Container(
                         Text(
-                            value="DO YOU HAVE AN ACCOUNT?",
+                            value="DO YOU HAVE AN ACCOUNT? "
+                            if self.up_txt == "CREATE  AN  ACCOUNT"
+                            else " DO NOT HAVE AN ACCOUNT? ",
                             font_family="lastica",
                             size=12,
-                            # expand=True,
                             spans=[
                                 TextSpan(
-                                    " Login",
+                                    " Login"
+                                    if self.up_txt == "CREATE  AN  ACCOUNT"
+                                    else " CREATE",
                                     TextStyle(
                                         color="#d73cbe",
                                         font_family="lastica",
                                         size=12,
                                         weight=FontWeight.BOLD,
                                     ),
-                                    on_click=self._go_to_login,
+                                    on_click=self._go_to_login
+                                    if self.up_txt == "CREATE  AN  ACCOUNT"
+                                    else self._go_to_register,
                                 ),
                             ],
                         ),
@@ -51,7 +55,9 @@ class MyLoginpage(UserControl):
                     ),
                     Container(
                         Text(
-                            "Create an account",
+                            "Create an account"
+                            if self.up_txt == "CREATE  AN  ACCOUNT"
+                            else "Login ",
                             weight=FontWeight.BOLD,
                             text_align="center",
                         ),
@@ -96,7 +102,7 @@ class MyLoginpage(UserControl):
             ),
         )
 
-    def custom_textfield(self, name, password_state: bool = False):
+    def custom_textfield(self, name: str):
         return Column(
             controls=[
                 Container(
@@ -115,8 +121,11 @@ class MyLoginpage(UserControl):
                         border=border.all(0.5, "white"),
                         cursor_color="#1d3263",
                         cursor_height=22,
-                        password=password_state,
-                        can_reveal_password=password_state,
+                        password=True if name == "Password:" else False,
+                        can_reveal_password=True if name == "Password:" else False,
+                        keyboard_type=KeyboardType.EMAIL
+                        if name == "Email:"
+                        else KeyboardType.TEXT,
                     ),
                     padding=padding.only(left=10, right=10, top=0, bottom=15),
                 ),
@@ -126,3 +135,6 @@ class MyLoginpage(UserControl):
 
     def _go_to_login(self, e):
         return self.page.go("/login")
+
+    def _go_to_register(self, e):
+        return self.page.go("/register")
