@@ -18,6 +18,7 @@ class MyLoginpage(UserControl):
                 text_align="center",
                 size=15,
             ),
+            expand=True,
         )
         self.login_text.margin = margin.only(top=40, bottom=20)
 
@@ -33,6 +34,7 @@ class MyLoginpage(UserControl):
                             value="DO YOU HAVE AN ACCOUNT?",
                             font_family="lastica",
                             size=12,
+                            # expand=True,
                             spans=[
                                 TextSpan(
                                     " Login",
@@ -46,6 +48,7 @@ class MyLoginpage(UserControl):
                                 ),
                             ],
                         ),
+                        margin=margin.only(top=15),
                     ),
                     Container(
                         Text(
@@ -56,7 +59,7 @@ class MyLoginpage(UserControl):
                         bgcolor="#8919db",
                         border_radius=5,
                         width=150,
-                        margin=margin.only(top=25),
+                        margin=margin.only(top=25, bottom=25),
                         padding=padding.only(bottom=4),
                     ),
                 ],
@@ -76,13 +79,14 @@ class MyLoginpage(UserControl):
             # offset=transform.Offset(-2, 0),
             # animate_offset=animation.Animation(1000),
         )
-        self._container.margin = margin.only(top=90, bottom=100)
+        self._container.margin = margin.only(top=60, bottom=100)
 
         return Container(
             content=Stack(
                 [
                     self._container,
                 ],
+                expand=True,
             ),
             alignment=alignment.center,
             height=800,
@@ -104,7 +108,7 @@ class MyLoginpage(UserControl):
                 Container(
                     TextField(
                         bgcolor="white",
-                        expand=True,
+                        # expand=True,
                         height=25,
                         text_style=TextStyle(color="#8919db", weight=FontWeight.W_500),
                         content_padding=padding.only(top=4, left=5),
@@ -119,6 +123,7 @@ class MyLoginpage(UserControl):
                     padding=padding.only(left=10, right=10, top=0, bottom=15),
                 ),
             ],
+            expand=True,
         )
 
     def _go_to_login(self, e):
