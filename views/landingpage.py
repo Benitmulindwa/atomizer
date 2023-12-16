@@ -8,7 +8,9 @@ class Mylandingpage(UserControl):
         super().__init__()
         self.page = page
         self.text_size = int((self.page.width / 21))
-        self.content = MyLoginpage(self.page, ["Email:", "Password:"], up_txt="LOGIN")
+        self.login_content = MyLoginpage(
+            self.page, ["Email:", "Password:"], up_txt="LOGIN"
+        )
 
     def build(self):
         self.logo = Container(height=30, width=30, bgcolor="blue")
@@ -20,17 +22,19 @@ class Mylandingpage(UserControl):
         self._atomizer.margin = margin.only(top=20)
 
         self.landing_anim = Container(
+            self.login_content,
             col={"md": 6, "xl": 6},
-            height=200,
-            bgcolor="red",
+            height=650,
+            expand=True,
+            alignment=alignment.center_right,
         )
-        self.landing_anim.margin = margin.only(left=20, right=20)
+        self.landing_anim.margin = margin.only(left=10)
+        self.landing_anim.padding = padding.only(right=50)
         # ---------------------------------------------------------------------------------------------------------------#
         ################### GET STARTED BUTTOM #####################################
         # ---------------------------------------------------------------------------------------------------------------#
         self.getstarted = Container(
             width=600,
-            height=35,
             expand=True,
             bgcolor="#8919db",
             content=Text("GET STARTED", expand=True, font_family="lastica"),
@@ -61,7 +65,7 @@ class Mylandingpage(UserControl):
 
         self.landing_text = Container(
             col={"md": 6, "xl": 6},
-            height=550,
+            width=650,
             expand=True,
             content=Text(
                 "Your  AI-Powered  Science  Problem - Solving Companion",
@@ -71,10 +75,11 @@ class Mylandingpage(UserControl):
                 weight=FontWeight.BOLD,
             ),
             alignment=alignment.center,
-            # on_hover=self.animate_text,
+            on_click=self.animate_text,
         )
 
-        self.landing_text.margin = margin.only(left=20, top=50)
+        self.landing_text.margin = margin.only(left=30, top=0, bottom=50)
+        self.landing_text.padding = padding.only(right=0, top=10)
 
         return Column(
             horizontal_alignment=CrossAxisAlignment.CENTER,
@@ -89,12 +94,15 @@ class Mylandingpage(UserControl):
                     ],
                     # top=20,
                 ),
-                Row(
-                    # vertical_alignment=CrossAxisAlignment.CENTER,
-                    # alignment=MainAxisAlignment.CENTER,
-                    controls=[self.landing_text, self.content],
+                ResponsiveRow(
+                    vertical_alignment=CrossAxisAlignment.CENTER,
+                    alignment=MainAxisAlignment.CENTER,
+                    controls=[
+                        self.landing_text,
+                        self.landing_anim,
+                        # Container(width=40, height=800, bgcolor="red"),
+                    ],
                 ),
-                # self.getstarted,
             ],
         )
 
@@ -106,9 +114,9 @@ class Mylandingpage(UserControl):
             self.landing_text.content.update()
             sleep(0.08)
 
-    ## GO TO LOGIN ##
-    def _go_to_login(self, e):
-        return self.page.go("/login")
+    ## GO TO REGISTER ##
+    def _go_to_register(self, e):
+        return self.page.go("/register")
 
 
 # ---------------------------------------------------------------------------------------------------------------#
@@ -116,19 +124,13 @@ class Mylandingpage(UserControl):
 
 def LandingPage(page):
     content = Mylandingpage(page)
-    login_content = MyLoginpage(page, ["Email:", "Password:"], up_txt="LOGIN")
-    login_container = Container(
-        login_content,
-        expand=True,
-    )
-    # login_container.margin = margin.only(left=800)
 
     return Container(
         content=Column(
             [
                 content,
-                # login_container,
             ],
+            expand=True,
         ),
         alignment=alignment.center,
         height=800,
