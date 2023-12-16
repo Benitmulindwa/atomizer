@@ -4,7 +4,7 @@ from custom_components import *
 
 
 def Register(page):
-    content = MyLoginpage(
+    content = LoginAndRegisterUI(
         page, ["Username:", "Email:", "Password:"], up_txt="CREATE  AN  ACCOUNT"
     )
     return Container(

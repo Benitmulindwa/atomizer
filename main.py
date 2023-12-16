@@ -5,6 +5,7 @@ from time import sleep
 
 def main(page: Page):
     page.title = "Atomizer"
+    # page.window_frameless = True
     page.theme_mode = "system"
     page.vertical_alignment = "center"
     page.horizontal_alignment = "center"

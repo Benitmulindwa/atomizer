@@ -1,7 +1,7 @@
 from flet import *
 
 
-class MyLoginpage(UserControl):
+class LoginAndRegisterUI(UserControl):
     def __init__(self, page, fields_list: list, up_txt: str):
         super().__init__()
         self.page = page
@@ -120,7 +120,7 @@ class MyLoginpage(UserControl):
         )
 
     def _go_to_login(self, e):
-        return self.page.go("/login")
+        return self.page.go("/")
 
     def _go_to_register(self, e):
         return self.page.go("/register")
