@@ -1,5 +1,6 @@
 from flet import *
 from time import sleep
+from custom_components import *
 
 
 class Mylandingpage(UserControl):
@@ -7,6 +8,7 @@ class Mylandingpage(UserControl):
         super().__init__()
         self.page = page
         self.text_size = int((self.page.width / 21))
+        self.content = MyLoginpage(self.page, ["Email:", "Password:"], up_txt="LOGIN")
 
     def build(self):
         self.logo = Container(height=30, width=30, bgcolor="blue")
@@ -29,6 +31,7 @@ class Mylandingpage(UserControl):
         self.getstarted = Container(
             width=600,
             height=35,
+            expand=True,
             bgcolor="#8919db",
             content=Text("GET STARTED", expand=True, font_family="lastica"),
             alignment=alignment.center,
@@ -77,39 +80,21 @@ class Mylandingpage(UserControl):
             horizontal_alignment=CrossAxisAlignment.CENTER,
             auto_scroll=True,
             controls=[
-                Stack(
+                Row(
                     controls=[
-                        Container(
-                            expand=True,
-                            height=800,
-                            gradient=LinearGradient(
-                                begin=alignment.center_left,
-                                end=alignment.center_right,
-                                colors=["#442063", "#1d3263"],
-                            ),
-                            alignment=alignment.center,
-                        ),
-                        Row(
-                            controls=[
-                                self.logo,
-                                self._atomizer,
-                                Row(expand=True),
-                                self.login_bt,
-                            ],
-                            # top=20,
-                        ),
-                        Column(
-                            controls=[
-                                ResponsiveRow(
-                                    vertical_alignment=CrossAxisAlignment.CENTER,
-                                    alignment=MainAxisAlignment.CENTER,
-                                    controls=[self.landing_text, self.landing_anim],
-                                ),
-                                self.getstarted,
-                            ],
-                        ),
-                    ]
-                )
+                        self.logo,
+                        self._atomizer,
+                        Row(expand=True),
+                        self.login_bt,
+                    ],
+                    # top=20,
+                ),
+                Row(
+                    # vertical_alignment=CrossAxisAlignment.CENTER,
+                    # alignment=MainAxisAlignment.CENTER,
+                    controls=[self.landing_text, self.content],
+                ),
+                # self.getstarted,
             ],
         )
 
@@ -131,5 +116,26 @@ class Mylandingpage(UserControl):
 
 def LandingPage(page):
     content = Mylandingpage(page)
+    login_content = MyLoginpage(page, ["Email:", "Password:"], up_txt="LOGIN")
+    login_container = Container(
+        login_content,
+        expand=True,
+    )
+    # login_container.margin = margin.only(left=800)
 
-    return content
+    return Container(
+        content=Column(
+            [
+                content,
+                # login_container,
+            ],
+        ),
+        alignment=alignment.center,
+        height=800,
+        expand=True,
+        gradient=LinearGradient(
+            begin=alignment.center_left,
+            end=alignment.center_right,
+            colors=["#1d3263", "#442063"],
+        ),
+    )

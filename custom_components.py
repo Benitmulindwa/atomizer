@@ -86,21 +86,7 @@ class MyLoginpage(UserControl):
         )
         self._container.margin = margin.only(top=60, bottom=100)
 
-        return Container(
-            content=Stack(
-                [
-                    self._container,
-                ],
-            ),
-            alignment=alignment.center,
-            height=800,
-            expand=True,
-            gradient=LinearGradient(
-                begin=alignment.center_left,
-                end=alignment.center_right,
-                colors=["#1d3263", "#442063"],
-            ),
-        )
+        return self._container
 
     def custom_textfield(self, name: str):
         return Column(
