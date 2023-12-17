@@ -1,6 +1,7 @@
 from flet import *
 from time import sleep
 from custom_components import *
+from authentification import _login_user
 
 
 class Mylandingpage(UserControl):
@@ -9,7 +10,7 @@ class Mylandingpage(UserControl):
         self.page = page
         self.text_size = int((self.page.width / 21))
         self.login_content = LoginAndRegisterUI(
-            self.page, ["Email:", "Password:"], up_txt="LOGIN"
+            self.page, ["Email:", "Password:"], up_txt="LOGIN", func=self._login
         )
 
     def build(self):
@@ -104,6 +105,17 @@ class Mylandingpage(UserControl):
                 ),
             ],
         )
+
+    def _login(self, e):
+        _login_user(self.landing_anim)
+
+        self.landing_anim.content.controls[0].content.controls[1].controls[
+            1
+        ].content.value = ""
+        self.landing_anim.content.controls[0].content.controls[2].controls[
+            1
+        ].content.value = ""
+        self.landing_anim.content.controls[0].update()
 
     def animate_text(self, e):
         word_list = []

@@ -1,5 +1,12 @@
-const = {
-    "apiKey": "AIzaSyDs-ozyJVwo5Xgb3P7Ecyr2F2TIT2HSfLs",
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+FIREBASE_API_KEY = os.getenv("FIREBASE_API_KEY")
+
+config = {
+    "apiKey": FIREBASE_API_KEY,
     "authDomain": "atomizer-97d91.firebaseapp.com",
     "projectId": "atomizer-97d91",
     "storageBucket": "atomizer-97d91.appspot.com",
