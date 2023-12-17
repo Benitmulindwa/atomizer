@@ -115,7 +115,7 @@ def column_align(col: Column, align: str):
     return col
 
 
-def main(page: ft.Page):
+def Chat(page):
     page.horizontal_alignment = "center"
     page.vertical_alignment = "center"
     page.theme_mode = "dark"
@@ -128,53 +128,52 @@ def main(page: ft.Page):
         content=Text("Atomizer", size=25),
     )
 
-    page.add(
-        Row(
-            controls=[
-                cont_pad(atomizer_text, top=25),
-                cont_pad(
-                    Container(
-                        content=Text("$1,000", size=15, color="#8919db"),
+    return Column(
+        [
+            Row(
+                controls=[
+                    cont_pad(atomizer_text, top=25),
+                    cont_pad(
+                        Container(
+                            content=Text("$1,000", size=15, color="#8919db"),
+                        ),
+                        top=25,
                     ),
-                    top=25,
-                ),
-                cont_pad(
-                    Container(
-                        alignment=alignment.top_left,
-                        content=IconButton(icon=icons.PAYMENT, icon_color="#8919db"),
-                    ),
-                    top=25,
-                    right=5,
-                ),
-            ],
-            alignment=MainAxisAlignment.END,
-        ),
-        main,
-        Divider(height=8, color="transparent"),
-        column_align(
-            Column(
-                [
-                    Row(
-                        controls=[
-                            prompt,
-                            Container(
-                                content=IconButton(
-                                    icons.ARROW_CIRCLE_UP,
-                                    icon_size=40,
-                                    selected_icon_color="#2b233c",
-                                )
+                    cont_pad(
+                        Container(
+                            alignment=alignment.top_left,
+                            content=IconButton(
+                                icon=icons.PAYMENT, icon_color="#8919db"
                             ),
-                        ],
-                        alignment=MainAxisAlignment.CENTER,
-                        spacing=5,
+                        ),
+                        top=25,
+                        right=5,
                     ),
-                ]
+                ],
+                alignment=MainAxisAlignment.END,
             ),
-            align="start",
-        ),
+            main,
+            Divider(height=8, color="transparent"),
+            column_align(
+                Column(
+                    [
+                        Row(
+                            controls=[
+                                prompt,
+                                Container(
+                                    content=IconButton(
+                                        icons.ARROW_CIRCLE_UP,
+                                        icon_size=40,
+                                        selected_icon_color="#2b233c",
+                                    )
+                                ),
+                            ],
+                            alignment=MainAxisAlignment.CENTER,
+                            spacing=5,
+                        ),
+                    ]
+                ),
+                align="start",
+            ),
+        ]
     )
-    page.update()
-
-
-if __name__ == "__main__":
-    ft.app(target=main)

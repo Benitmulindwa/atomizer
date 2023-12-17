@@ -1,8 +1,7 @@
 from flet import Container
 from views.login import LandingPage
 from views.register import Register
-
-# from views.chat import Chat
+from views.chat import Chat
 
 
 class Route:
@@ -11,7 +10,7 @@ class Route:
         self.routes = {
             "/": LandingPage(page),
             "/register": Register(page),
-            # "/chat": Chat(page),
+            "/chat": Chat(page),
         }
         self.body = Container(content=self.routes["/"], expand=True)
 
