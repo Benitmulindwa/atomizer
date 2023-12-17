@@ -131,7 +131,9 @@ def LandingPage(page):
                 content,
             ],
             expand=True,
+            scroll=ScrollMode.AUTO,
         ),
+        
         alignment=alignment.center,
         height=800,
         expand=True,
