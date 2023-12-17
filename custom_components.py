@@ -1,12 +1,14 @@
 from flet import *
+from functools import partial
 
 
 class LoginAndRegisterUI(UserControl):
-    def __init__(self, page, fields_list: list, up_txt: str):
+    def __init__(self, page, fields_list: list, up_txt: str, func):
         super().__init__()
         self.page = page
         self.fields_list = fields_list
         self.up_txt = up_txt
+        self.func = func
 
     def build(self):
         # print(self.custom_textfield("vagaga").controls[1].content)
@@ -52,6 +54,7 @@ class LoginAndRegisterUI(UserControl):
                             ],
                         ),
                         margin=margin.only(top=15),
+                        padding=padding.only(left=10, right=10),
                     ),
                     Container(
                         Text(
@@ -66,6 +69,7 @@ class LoginAndRegisterUI(UserControl):
                         width=150 if self.up_txt == "CREATE  AN  ACCOUNT" else 100,
                         margin=margin.only(top=25, bottom=25),
                         padding=padding.only(bottom=4),
+                        on_click=partial(self.func),
                     ),
                 ],
                 horizontal_alignment=CrossAxisAlignment.CENTER,

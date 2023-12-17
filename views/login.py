@@ -26,10 +26,10 @@ class Mylandingpage(UserControl):
             col={"md": 6, "xl": 6},
             height=650,
             expand=True,
-            alignment=alignment.center_right,
+            alignment=alignment.center,
         )
-        self.landing_anim.margin = margin.only(left=10)
-        self.landing_anim.padding = padding.only(right=50)
+        # self.landing_anim.margin = margin.only(left=10)
+        self.landing_anim.padding = padding.only(left=50, right=50)
         # ---------------------------------------------------------------------------------------------------------------#
         ################### GET STARTED BUTTOM #####################################
         # ---------------------------------------------------------------------------------------------------------------#
@@ -100,7 +100,6 @@ class Mylandingpage(UserControl):
                     controls=[
                         self.landing_text,
                         self.landing_anim,
-                        # Container(width=40, height=800, bgcolor="red"),
                     ],
                 ),
             ],
@@ -133,7 +132,6 @@ def LandingPage(page):
             expand=True,
             scroll=ScrollMode.AUTO,
         ),
-        
         alignment=alignment.center,
         height=800,
         expand=True,
