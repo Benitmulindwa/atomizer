@@ -116,6 +116,8 @@ class Mylandingpage(UserControl):
             1
         ].content.value = ""
         self.landing_anim.content.controls[0].update()
+        self.page.go("/chat")
+        self.page.update()
 
     def animate_text(self, e):
         word_list = []

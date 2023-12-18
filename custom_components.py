@@ -116,6 +116,7 @@ class LoginAndRegisterUI(UserControl):
                         keyboard_type=KeyboardType.EMAIL
                         if name == "Email:"
                         else KeyboardType.TEXT,
+                        enable_suggestions=True,
                     ),
                     padding=padding.only(left=10, right=10, top=0, bottom=15),
                 ),
