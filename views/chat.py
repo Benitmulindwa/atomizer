@@ -16,7 +16,6 @@ def main_style():
     return {
         "expand": True,
         "width": 420,
-        # "height": 500,
         "bgcolor": "#2b233c",
         "border_radius": 10,
         "padding": 15,
@@ -100,26 +99,20 @@ class Prompt(ft.TextField):
         self.update()
 
 
+##Style##
+
+
 def cont_pad(cont: Container, left=10, top=10, right=10, bottom=10):
     cont.padding = padding.only(left, top, right, bottom)
     return cont
 
 
-def column_align(col: Column, align: str):
-    if align == "start":
-        col.alignment = CrossAxisAlignment.START
-    elif align == "end":
-        col.alignment = CrossAxisAlignment.END
-    else:
-        col.alignment = CrossAxisAlignment.CENTER
-    return col
-
-
 def Chat(page):
-    page.horizontal_alignment = "center"
-    page.vertical_alignment = "center"
-    page.theme_mode = "dark"
-
+    if page.route == "/chat":
+        page.padding = 10
+    else:
+        page.padding = 0
+    page.update()
     main = MainContentArea()
     prompt = Prompt(main.chat)
 
@@ -154,26 +147,20 @@ def Chat(page):
             ),
             main,
             Divider(height=8, color="transparent"),
-            column_align(
-                Column(
-                    [
-                        Row(
-                            controls=[
-                                prompt,
-                                Container(
-                                    content=IconButton(
-                                        icons.ARROW_CIRCLE_UP,
-                                        icon_size=40,
-                                        selected_icon_color="#2b233c",
-                                    )
-                                ),
-                            ],
-                            alignment=MainAxisAlignment.CENTER,
-                            spacing=5,
-                        ),
-                    ]
-                ),
-                align="start",
+            Row(
+                controls=[
+                    prompt,
+                    Container(
+                        content=IconButton(
+                            icons.ARROW_CIRCLE_UP,
+                            icon_size=40,
+                            selected_icon_color="#2b233c",
+                        )
+                    ),
+                ],
+                alignment=MainAxisAlignment.CENTER,
+                spacing=5,
             ),
-        ]
+        ],
+        horizontal_alignment=CrossAxisAlignment.CENTER,
     )

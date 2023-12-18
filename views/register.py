@@ -1,6 +1,6 @@
 from flet import *
 from custom_components import *
-from authentification import _register_user
+from authentication import _register_user
 
 
 def Register(page):

@@ -1,0 +1,55 @@
+import pyrebase
+from config import config
+import json
+
+firebase = pyrebase.initialize_app(config)
+auth = firebase.auth()
+db = firebase.database()
+
+
+def _register_user(content):
+    username = content.controls[0].content.controls[1].controls[1].content.value
+    user_email = content.controls[0].content.controls[2].controls[1].content.value
+    user_password = content.controls[0].content.controls[3].controls[1].content.value
+    try:
+        if len(user_password) >= 7:
+            auth.create_user_with_email_and_password(user_email, user_password)
+            user = auth.sign_in_with_email_and_password(user_email, user_password)
+            data = {"name": username}
+            results = db.child("users").push(data, user["idToken"])
+            print("USER Registered", results)
+        else:
+            content.controls[0].content.controls[3].controls[
+                1
+            ].content.error_text = "The password must have at least 7 characters"
+            content.controls[0].content.update()
+    except Exception as e:
+        error_str = json.loads(json.dumps("{" + "".join(str(e).splitlines()[1:])))
+        _error = json.loads(error_str)
+        print(_error["error"]["message"].lower())
+        content.controls[0].content.controls[2].controls[1].content.error_text = _error[
+            "error"
+        ]["message"].lower()
+        content.controls[0].content.update()
+
+
+def _login_user(landing_anim):
+    user_email = (
+        landing_anim.content.controls[0].content.controls[1].controls[1].content.value
+    )
+
+    user_password = (
+        landing_anim.content.controls[0].content.controls[2].controls[1].content.value
+    )
+    try:
+        user = auth.sign_in_with_email_and_password(user_email, user_password)
+        info = auth.get_account_info(user["idToken"])
+        print(info)
+    except:
+        landing_anim.content.controls[0].content.controls[1].controls[
+            1
+        ].content.error_text = "Wrong email or password"
+        landing_anim.content.controls[0].content.controls[2].controls[
+            1
+        ].content.error_text = "Wrong email or password"
+        landing_anim.content.controls[0].update()

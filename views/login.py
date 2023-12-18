@@ -1,7 +1,7 @@
 from flet import *
 from time import sleep
 from custom_components import *
-from authentification import _login_user
+from authentication import _login_user
 
 
 class Mylandingpage(UserControl):
@@ -150,6 +150,6 @@ def LandingPage(page):
         gradient=LinearGradient(
             begin=alignment.center_left,
             end=alignment.center_right,
-            colors=["#1d3263", "#442063"],
+            colors=["#001f3f", "#191970"],
         ),
     )
