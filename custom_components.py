@@ -85,8 +85,8 @@ class LoginAndRegisterUI(UserControl):
                 offset=Offset(0, 0),
                 blur_style=ShadowBlurStyle.OUTER,
             ),
-            offset=transform.Offset(0, -2),
-            animate_offset=animation.Animation(1000),
+            # offset=transform.Offset(0, -2),
+            # animate_offset=animation.Animation(1000),
         )
         self._container.margin = margin.only(top=60, bottom=100)
 

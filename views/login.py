@@ -117,8 +117,6 @@ class Mylandingpage(UserControl):
             1
         ].content.value = ""
         self.landing_anim.content.controls[0].update()
-        self.page.go("/chat")
-        self.page.update()
 
     def animate_text(self, e):
         word_list = []
@@ -131,6 +129,17 @@ class Mylandingpage(UserControl):
     ## GO TO REGISTER ##
     def _go_to_register(self, e):
         return self.page.go("/register")
+
+    def snackbar(self, text):
+        self.page.snack_bar = SnackBar(
+            bgcolor="blue",
+            open=True,
+            content=Row(
+                alignment=MainAxisAlignment.CENTER,
+                controls=[Text(text)],
+            ),
+        )
+        self.page.update()
 
 
 # ---------------------------------------------------------------------------------------------------------------#
