@@ -14,6 +14,7 @@ def main(page: Page):
     page.on_route_change = myroute.change_route
     page.add(myroute.body)
     page.go("/register")
+
     page.update()
 
 

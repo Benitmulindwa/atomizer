@@ -27,22 +27,39 @@
 # response = model.generate_content("What is the meaning of life?")
 
 
-from flet import *
+# import spacy
+
+# # import openai
+
+# # # Set your OpenAI API key
+# # openai.api_key = 'your_api_key_here'
+
+# # Load the spaCy English model
+# nlp = spacy.load("en_core_web_sm")
 
 
-def main(page: Page):
-    def trigger(e):
-        e.control.bgcolor = "red" if e.control.bgcolor == "green" else "green"
-        e.control.update()
+# def classify_question(question):
+#     doc = nlp(question)
 
-    page.vertical_alignment = "center"
-    page.horizontal_alignment = "center"
-    page.add(
-        Container(width=100, height=100, bgcolor="green", on_hover=trigger),
-        Container(width=100, height=100, bgcolor="green", on_hover=trigger),
-    )
-    page.update()
+#     # Check if the question is about the creator
+#     if any(token.text.lower() in ["created", "creator"] for token in doc):
+#         return f"My creator is {your_name}."
+#     else:
+#         # Check if the question is science-oriented
+#         # if any(token.text.lower() in ['science', 'scientific'] for token in doc):
+#         #     response = openai.Completion.create(
+#         #         engine="text-davinci-002",
+#         #         prompt=question,
+#         #         max_tokens=100
+#         #     )
+#         #     return response.choices[0].text.strip()
+
+#         # Default response for other questions
+#         return "I'm not sure how to answer that."
 
 
-if __name__ == "__main__":
-    app(target=main)
+# # Example usage
+# your_name = "Benit Mulindwa"
+# user_question = input("Ask me something: ")
+# response = classify_question(user_question)
+# print(response)
