@@ -130,17 +130,6 @@ class Mylandingpage(UserControl):
     def _go_to_register(self, e):
         return self.page.go("/register")
 
-    def snackbar(self, text):
-        self.page.snack_bar = SnackBar(
-            bgcolor="blue",
-            open=True,
-            content=Row(
-                alignment=MainAxisAlignment.CENTER,
-                controls=[Text(text)],
-            ),
-        )
-        self.page.update()
-
 
 # ---------------------------------------------------------------------------------------------------------------#
 

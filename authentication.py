@@ -42,7 +42,6 @@ def _login_user(landing_anim):
     try:
         user = auth.sign_in_with_email_and_password(user_email, user_password)
         info = auth.get_account_info(user["idToken"])
-
         print(info)
     except:
         landing_anim.content.controls[0].content.controls[1].controls[

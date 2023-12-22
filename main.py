@@ -13,9 +13,9 @@ def main(page: Page):
     myroute = Route(page)
     page.on_route_change = myroute.change_route
 
-    page.update()
     page.add(myroute.body)
-    page.go("/")
+    page.go("/chat")
+    page.update()
 
 
 if __name__ == "__main__":

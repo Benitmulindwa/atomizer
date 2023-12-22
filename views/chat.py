@@ -121,6 +121,18 @@ def Chat(page):
         content=Text("Atomizer", size=25),
     )
 
+    def snackbar(text):
+        page.snack_bar = SnackBar(
+            bgcolor="blue",
+            open=True,
+            content=Row(
+                alignment=MainAxisAlignment.CENTER,
+                controls=[Text(text)],
+            ),
+        )
+        page.update()
+
+    snackbar("You have logged in successfully!")
     return Column(
         [
             Row(
