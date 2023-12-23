@@ -112,15 +112,16 @@ def Chat(page):
     prompt = Prompt(main.chat)
     atomizer_text = Container(
         expand=True,
-        content=Text("Atomizer", size=25),
+        content=Text("Atomizer", size=25, font_family="lastica"),
     )
 
+    ## DARK & LIGHT MODE ##
     def switch(e):
         if e.control.data == True:
             page.theme_mode = ThemeMode.LIGHT
             e.control.icon = icons.DARK_MODE_ROUNDED
             prompt.border_color = "black"
-            main.bgcolor = "#8919db"
+            main.bgcolor = "#ddf2fd"
             e.control.data = False
 
         else:
@@ -181,6 +182,7 @@ def Chat(page):
                             IconButton(
                                 icon=icons.LIGHT_MODE_ROUNDED,
                                 data=True,
+                                icon_color="#8919db",
                                 on_click=switch,
                             )
                         ),
