@@ -16,7 +16,7 @@ def main_style():
     return {
         "expand": True,
         "width": 420,
-        "bgcolor": "#2b233c",
+        "bgcolor": "#1d3263",
         "border_radius": 10,
         "padding": 15,
     }
@@ -115,6 +115,22 @@ def Chat(page):
         content=Text("Atomizer", size=25),
     )
 
+    def switch(e):
+        if e.control.data == True:
+            page.theme_mode = ThemeMode.LIGHT
+            e.control.icon = icons.DARK_MODE_ROUNDED
+            prompt.border_color = "black"
+            main.bgcolor = "#8919db"
+            e.control.data = False
+
+        else:
+            e.control.icon = icons.LIGHT_MODE_ROUNDED
+            page.theme_mode = ThemeMode.DARK
+            prompt.border_color = "white"
+            main.bgcolor = "#1d3263"
+            e.control.data = True
+        page.update()
+
     def run_prompt(event):
         text: any = prompt.value
         prompt.user_output(prompt=text)
@@ -145,7 +161,7 @@ def Chat(page):
                     cont_pad(atomizer_text, top=25),
                     cont_pad(
                         Container(
-                            content=Text("$1,000", size=15, color="#8919db"),
+                            content=Text("1,000", size=15, color="#8919db"),
                         ),
                         top=25,
                     ),
@@ -160,6 +176,17 @@ def Chat(page):
                         top=25,
                         right=5,
                     ),
+                    cont_pad(
+                        Container(
+                            IconButton(
+                                icon=icons.LIGHT_MODE_ROUNDED,
+                                data=True,
+                                on_click=switch,
+                            )
+                        ),
+                        top=25,
+                        right=5,
+                    ),
                 ],
                 alignment=MainAxisAlignment.END,
             ),
@@ -167,18 +194,17 @@ def Chat(page):
             Divider(height=8, color="transparent"),
             Row(
                 controls=[
+                    Container(width=10),
                     prompt,
-                    Container(
-                        content=IconButton(
-                            icons.ARROW_CIRCLE_UP,
-                            icon_size=40,
-                            selected_icon_color="#2b233c",
-                            on_click=run_prompt,
-                        )
+                    IconButton(
+                        icons.ARROW_CIRCLE_UP,
+                        icon_size=40,
+                        selected_icon_color="#2b233c",
+                        on_click=run_prompt,
                     ),
                 ],
                 alignment=MainAxisAlignment.CENTER,
-                spacing=5,
+                spacing=0,
             ),
         ],
         horizontal_alignment=CrossAxisAlignment.CENTER,
