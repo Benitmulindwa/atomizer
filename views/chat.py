@@ -108,31 +108,36 @@ def cont_pad(cont: Container, left=10, top=10, right=10, bottom=10):
 
 
 def Chat(page):
-    if page.route == "/chat":
-        page.padding = 10
-    else:
-        page.padding = 0
-    page.update()
     main = MainContentArea()
     prompt = Prompt(main.chat)
-
     atomizer_text = Container(
         expand=True,
         content=Text("Atomizer", size=25),
     )
 
+    def run_prompt(event):
+        text: any = prompt.value
+        prompt.user_output(prompt=text)
+        prompt.value = ""
+        prompt.update()
+        prompt.gpt_output(prompt=text)
+        prompt.update()
+
+    ##Snackbar##
+
     def snackbar(text):
         page.snack_bar = SnackBar(
-            bgcolor="blue",
+            bgcolor="#1d3263",
             open=True,
+            duration=1000,
             content=Row(
                 alignment=MainAxisAlignment.CENTER,
-                controls=[Text(text)],
+                controls=[Text(text, color="white", font_family="lastica")],
             ),
         )
         page.update()
 
-    snackbar("You have logged in successfully!")
+    snackbar("You  have  logged  in  successfully!")
     return Column(
         [
             Row(
@@ -148,7 +153,8 @@ def Chat(page):
                         Container(
                             alignment=alignment.top_left,
                             content=IconButton(
-                                icon=icons.PAYMENT, icon_color="#8919db"
+                                icon=icons.PAYMENT,
+                                icon_color="#8919db",
                             ),
                         ),
                         top=25,
@@ -167,6 +173,7 @@ def Chat(page):
                             icons.ARROW_CIRCLE_UP,
                             icon_size=40,
                             selected_icon_color="#2b233c",
+                            on_click=run_prompt,
                         )
                     ),
                 ],
