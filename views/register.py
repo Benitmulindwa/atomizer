@@ -5,13 +5,15 @@ from authentication import _register_user
 
 def Register(page):
     def _register(e):
-        _register_user(content)
-        content.controls[0].content.controls[1].controls[1].content.value = ""
-        content.controls[0].content.controls[2].controls[1].content.value = ""
-        content.controls[0].content.controls[3].controls[1].content.value = ""
-        content.controls[0].update()
+        reg_status = _register_user(register_form)
+        register_form.controls[0].content.controls[1].controls[1].content.value = ""
+        register_form.controls[0].content.controls[2].controls[1].content.value = ""
+        register_form.controls[0].content.controls[3].controls[1].content.value = ""
+        register_form.controls[0].update()
+        if reg_status == True:
+            page.go("/chat")
 
-    content = LoginAndRegisterUI(
+    register_form = LoginAndRegisterUI(
         page,
         ["Username:", "Email:", "Password:"],
         up_txt="CREATE  AN  ACCOUNT",
@@ -21,7 +23,7 @@ def Register(page):
     return Container(
         content=Stack(
             [
-                content,
+                register_form,
             ],
         ),
         alignment=alignment.center,
