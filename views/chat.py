@@ -65,7 +65,10 @@ class CreateMessage(ft.Column):
 
 class Prompt(ft.TextField):
     def __init__(self, chat: ft.ListView):
-        super().__init__(**prompt_style(), on_submit=self.run_prompt)
+        super().__init__(
+            **prompt_style(),
+            on_submit=self.run_prompt,
+        )
         self.hint_text = "Ask me anything..."
         self.chat: ListView = chat
 
@@ -154,8 +157,8 @@ def Chat(page):
         )
         page.update()
 
-    if page.route == "/chat":
-        snackbar("You  have  logged  in  successfully!")
+    snackbar("You  have  logged  in  successfully!")
+
     return Column(
         [
             Row(

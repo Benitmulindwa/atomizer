@@ -23,7 +23,7 @@ class Mylandingpage(UserControl):
         )
         self._atomizer.margin = margin.only(top=20)
 
-        self.landing_anim = Container(
+        self.login_form = Container(
             self.login_content,
             col={"md": 6, "xl": 6},
             height=650,
@@ -31,7 +31,7 @@ class Mylandingpage(UserControl):
             alignment=alignment.center,
         )
         # self.landing_anim.margin = margin.only(left=10)
-        self.landing_anim.padding = padding.only(left=50, right=50)
+        self.login_form.padding = padding.only(left=50, right=50)
         # ---------------------------------------------------------------------------------------------------------------#
         ################### GET STARTED BUTTOM #####################################
         # ---------------------------------------------------------------------------------------------------------------#
@@ -101,21 +101,21 @@ class Mylandingpage(UserControl):
                     alignment=MainAxisAlignment.CENTER,
                     controls=[
                         self.landing_text,
-                        self.landing_anim,
+                        self.login_form,
                     ],
                 ),
             ],
         )
 
     def _login(self, e):
-        loggedin = _login_user(self.landing_anim)
-        self.landing_anim.content.controls[0].content.controls[1].controls[
+        loggedin = _login_user(self.login_form)
+        self.login_form.content.controls[0].content.controls[1].controls[
             1
         ].content.value = ""
-        self.landing_anim.content.controls[0].content.controls[2].controls[
+        self.login_form.content.controls[0].content.controls[2].controls[
             1
         ].content.value = ""
-        self.landing_anim.content.controls[0].update()
+        self.login_form.content.controls[0].update()
         if loggedin == True:
             self.page.go("/chat")
 
