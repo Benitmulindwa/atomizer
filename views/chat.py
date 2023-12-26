@@ -162,20 +162,18 @@ def Chat(page):
                     cont_pad(atomizer_text, top=25),
                     cont_pad(
                         Container(
-                            content=Text("1,000", size=15, color="#8919db"),
+                            Text("1,000", size=15, color="#8919db"),
                         ),
                         top=25,
                     ),
                     cont_pad(
                         Container(
-                            alignment=alignment.top_left,
-                            content=IconButton(
+                            IconButton(
                                 icon=icons.PAYMENT,
                                 icon_color="#8919db",
                             ),
                         ),
                         top=25,
-                        right=5,
                     ),
                     cont_pad(
                         Container(
