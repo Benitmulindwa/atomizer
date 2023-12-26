@@ -127,6 +127,8 @@ class Mylandingpage(UserControl):
             self.landing_text.content.update()
             sleep(0.08)
 
+    ## Snack bar
+
     ## GO TO REGISTER ##
     def _go_to_register(self, e):
         return self.page.go("/register")
