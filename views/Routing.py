@@ -12,6 +12,7 @@ class Route:
             "/register": Register(page),
             "/chat": Chat(page),
         }
+        a = LandingPage(page)
         self.body = Container(content=self.routes["/"], expand=True)
 
     def change_route(self, route):

@@ -154,7 +154,8 @@ def Chat(page):
         )
         page.update()
 
-    snackbar("You  have  logged  in  successfully!")
+    if page.route == "/chat":
+        snackbar("You  have  logged  in  successfully!")
     return Column(
         [
             Row(

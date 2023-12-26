@@ -108,8 +108,7 @@ class Mylandingpage(UserControl):
         )
 
     def _login(self, e):
-        _login_user(self.landing_anim)
-
+        loggedin = _login_user(self.landing_anim)
         self.landing_anim.content.controls[0].content.controls[1].controls[
             1
         ].content.value = ""
@@ -117,6 +116,8 @@ class Mylandingpage(UserControl):
             1
         ].content.value = ""
         self.landing_anim.content.controls[0].update()
+        if loggedin == True:
+            self.page.go("/chat")
 
     def animate_text(self, e):
         word_list = []
